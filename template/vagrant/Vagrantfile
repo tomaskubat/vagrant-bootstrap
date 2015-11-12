@@ -1,0 +1,34 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+require 'rbconfig'
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+    config.vm.box_url = "<USER_BOX_URL>"
+    config.vm.box = "<USER_BOX_NAME>"
+
+    config.vm.provider "virtualbox" do |vm|
+        vm.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+        vm.name = "<USER_BOX_NAME>"
+        vm.memory = <USER_MEMORY>
+        vm.cpus = <USER_VCPU>
+        vm.gui = <USER_USE_GUI>
+    end
+
+    config.ssh.forward_agent = true
+
+    config.vm.provision "default-bootstrap-provision", type: "shell" do |shell|
+        shell.path = "bootstrap.sh"
+        shell.args = RbConfig::CONFIG['host_os']
+    end
+
+    config.vm.synced_folder "../",   "/vagrant-src",        type: "nfs"
+    config.vm.synced_folder "./usr", "/vagrant-usr",        type: "nfs"
+
+    config.vm.network "private_network", ip: "192.168.8.15"
+
+    config.vm.network :forwarded_port, guest: 22,    host: 2222, id: "ssh"
+    config.vm.network :forwarded_port, guest: 3306,  host: 3307
+    config.vm.network :forwarded_port, guest: 80,    host: 8080
+end
