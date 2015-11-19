@@ -19,9 +19,14 @@ Requirements
 
 - bash (>= 3.0)
 
-Creating new Vagrant Bootstrap
+Usage
 ------------------------------
+Creating new Vagrant Bootstrap:
 
 ```
 $ ./create-project.sh
 ```
+
+Your new Boostrap for Vagrant project will appear at directory `new-project`.
+
+You should rename this folder a move it to your project directory. 

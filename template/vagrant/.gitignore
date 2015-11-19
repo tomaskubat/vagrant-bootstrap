@@ -1,4 +1,6 @@
 .vagrant/
 
 usr/*
+!usr/README.md
+!usr/bootstrap.sh.dist
 
