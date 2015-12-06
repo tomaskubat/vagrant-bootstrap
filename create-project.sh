@@ -1,6 +1,6 @@
 #!/bin/bash
 
-declare -r BOXES_HTTP_MIRROR="http://boxes.prisedni.cz"
+declare -r BOXES_HTTP_MIRROR="http://boxes.tomaskubat.cz"
 declare -r BOXES_CHECKSUM_FILE="sha1sum.txt"
 
 function colorize_err() {
